@@ -6,9 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-    //(https?:\/\/)([^\s]{1,}|)*
     public static void main(String[] args) {
-        Pattern patternLink = Pattern.compile("<a.*?href ?= ?['\\\"]([^'\\\"]*)['\\\"].*?>(.*?)<\\/a>", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+        Pattern patternLink = Pattern.compile("<a\\s*href\\s*=\\s*['\\\"]([^'\\\"]*)['\\\"].*?>(.*?)<\\/a>", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         Pattern pattern = Pattern.compile("(https?:\\/\\/)?([\\w-]{1,}\\.[\\w-]{1,})[^\\s]*$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
         Matcher matcher;
         Matcher matcher1;
@@ -25,7 +24,6 @@ public class Main {
             while ((input = bufferedReader.readLine()) != null) {
                 matcher = patternLink.matcher(input);
                 matcher1 = pattern.matcher(input);
-
                 if (matcher.find()) {
                     result.append(matcher.group(1) + "\t" + matcher.group(2) + "\n");
                 } else if (matcher1.find()) {
